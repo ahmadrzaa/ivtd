@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IVTD — Inventions Village Technical Design</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/ivtd.css" />
+</head>
+<body>
+
+  <!-- Header / Navbar -->
+  <header class="ivtd-header">
+    <div class="ivtd-container">
+      <a class="ivtd-brand" href="#about" aria-label="IVTD Home">
+        <img src="assets/ivtd.png" alt="IVTD logo">
+        <!-- <span>IVTD</span> -->
+      </a>
+
+      <nav class="ivtd-nav" id="ivtdNav" aria-label="Primary">
+        <ul>
+          <li><a href="#about"    data-i18n="nav_about">About</a></li>
+          <li><a href="#vision"   data-i18n="nav_vision">Vision</a></li>
+          <li><a href="#mission"  data-i18n="nav_mission">Mission</a></li>
+          <li><a href="#services" data-i18n="nav_services">Services</a></li>
+          <li><a href="#books"    data-i18n="nav_books">Books</a></li>
+          <li><a href="#contact"  class="ivtd-cta" data-i18n="nav_contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="ivtd-actions">
+        <button id="ivtdLang" class="ivtd-lang" type="button" aria-label="Switch language">AR</button>
+        <button id="ivtdBurger" class="ivtd-burger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="about" class="ivtd-hero">
+    <div class="ivtd-container hero-wrap">
+      <div class="hero-copy">
+        <h1>
+          <span data-i18n="hero_kicker">Inventing better solutions</span><br />
+          <strong data-i18n="hero_title">Inventions Village Technical Design</strong>
+        </h1>
+        <p class="hero-sub" data-i18n="hero_sub">
+          Consulting, feasibility & training to turn ideas into real products.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#services" class="btn-primary" data-i18n="hero_cta1">Explore Services</a>
+          <a href="#contact" class="btn-ghost" data-i18n="hero_cta2">Contact IVTD</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-placeholder" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder / Intro -->
+  <section class="ivtd-section">
+    <div class="ivtd-container">
+      <div class="split">
+        <div class="col">
+          <h2 data-i18n="about_title">About IVTD</h2>
+          <p data-i18n="about_p1">
+            Inventions Village Technical Design was founded by Aref Al Awadhi, an activist in inventions and product development, on October 12, 2024, in the Kingdom of Bahrain.
+          </p>
+          <p data-i18n="about_p2">
+            Mr. Al Awadhi is an active member and one of the founders of the Bahrain Researchers and Inventors Society (BRAINS). He also helped establish the Electronics Department at the Children’s and Youth Science Center, and has participated in exhibitions, scientific forums, and judging committees.
+          </p>
+        </div>
+        <div class="col">
+          <div class="card">
+            <h3 data-i18n="books_title">Books by Aref Al Awadhi</h3>
+            <ul class="checklist">
+              <li data-i18n="book_1">The Story of Electricity and Electronics: A Journey Through the History of Key Inventions.</li>
+              <li data-i18n="book_2">How to Become an Inventor.</li>
+              <li data-i18n="book_3">Invention: From Idea to Business (published in both Arabic and English).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision / Mission -->
+  <section id="vision" class="ivtd-section dim">
+    <div class="ivtd-container split">
+      <div class="col">
+        <h2 data-i18n="vision_title">Vision</h2>
+        <p data-i18n="vision_p">
+          Towards distinguished work in developing and investing in inventions based on creativity and innovation.
+        </p>
+      </div>
+      <div id="mission" class="col">
+        <h2 data-i18n="mission_title">Mission</h2>
+        <p data-i18n="mission_p">
+          To strive to invest in inventions and innovations for the general benefit of society.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="ivtd-section">
+    <div class="ivtd-container">
+      <h2 class="center" data-i18n="services_title">Services</h2>
+      <div class="cards">
+        <div class="svc">
+          <h3 data-i18n="svc_1_t">Study technical problems & design solutions</h3>
+          <p data-i18n="svc_1_p">Problem review, constraints mapping, and concept design to create viable technical solutions.</p>
+        </div>
+        <div class="svc">
+          <h3 data-i18n="svc_2_t">Feasibility studies (technical, practical, commercial)</h3>
+          <p data-i18n="svc_2_p">Assess technical viability, practical implementation, and market/commercial potential.</p>
+        </div>
+        <div class="svc">
+          <h3 data-i18n="svc_3_t">Consultations & assistance for inventors</h3>
+          <p data-i18n="svc_3_p">Guidance on development steps, prototyping, and routes to market and partnerships.</p>
+        </div>
+        <div class="svc">
+          <h3 data-i18n="svc_4_t">Training courses</h3>
+          <p data-i18n="svc_4_p">Workshops and programs to build skills for students, innovators, and teams.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Books strip -->
+  <section id="books" class="ivtd-section dim">
+    <div class="ivtd-container">
+      <h2 class="center" data-i18n="books_strip_title">Featured Books</h2>
+      <div class="book-strip">
+        <div class="book">
+          <div class="bk-cover" aria-hidden="true"></div>
+          <div class="bk-title" data-i18n="book_1_short">Electricity & Electronics — A Journey of Inventions</div>
+        </div>
+        <div class="book">
+          <div class="bk-cover" aria-hidden="true"></div>
+          <div class="bk-title" data-i18n="book_2_short">How to Become an Inventor</div>
+        </div>
+        <div class="book">
+          <div class="bk-cover" aria-hidden="true"></div>
+          <div class="bk-title" data-i18n="book_3_short">Invention: From Idea to Business</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="ivtd-section">
+    <div class="ivtd-container contact">
+      <div class="contact-card">
+        <h2 data-i18n="contact_title">Contact</h2>
+
+        <div class="contact-grid">
+          <div class="contact-info">
+            <a class="icon-row" href="mailto:aref@inventionsvillage.com">
+              <!-- Email icon -->
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/>
+              </svg>
+              <span>aref@inventionsvillage.com</span>
+            </a>
+
+            <a class="icon-row" href="https://www.linkedin.com/in/aref-al-awadhi-791a312a/" target="_blank" rel="noopener">
+              <!-- LinkedIn icon -->
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
+                <path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5Zm.02 5.5H2v12h3V9ZM9 9H6v12h3v-6c0-1.65 1.35-3 3-3s3 .93 3 2.9V21h3v-6.5C18 11.5 16.43 9 13.9 9c-1.29 0-2.52.58-3.3 1.53V9Z"/>
+              </svg>
+              <span data-i18n="contact_linkedin">LinkedIn Profile</span>
+            </a>
+
+            <a class="icon-row" href="tel:+97339888051">
+              <!-- Phone icon -->
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
+                <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.4 22 2 13.6 2 3a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2Z"/>
+              </svg>
+              <span>+973-39888051</span>
+            </a>
+          </div>
+
+          <form id="contactForm" class="contact-form" novalidate>
+            <div class="row">
+              <label>
+                <span data-i18n="form_name">Your name</span>
+                <input type="text" name="name" required placeholder="">
+              </label>
+              <label>
+                <span data-i18n="form_email">Email</span>
+                <input type="email" name="email" required placeholder="">
+              </label>
+            </div>
+
+            <div class="row">
+              <label>
+                <span data-i18n="form_phone">Phone</span>
+                <input type="tel" name="phone" placeholder="">
+              </label>
+              <label>
+                <span data-i18n="form_subject">Subject</span>
+                <input type="text" name="subject" placeholder="">
+              </label>
+            </div>
+
+            <label class="full">
+              <span data-i18n="form_message">Message</span>
+              <textarea name="message" rows="5" required placeholder=""></textarea>
+            </label>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-primary" data-i18n="form_send">Send</button>
+              <p id="formStatus" class="form-status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer with logo -->
+  <footer class="ivtd-footer">
+    <div class="ivtd-container footer-wrap">
+      <a class="footer-brand" href="#about" aria-label="IVTD Home">
+        <img src="assets/ivtd.png" alt="IVTD logo">
+        <span data-i18n="footer_brand">Inventions Village Technical Design</span>
+      </a>
+      <p class="rights">
+        &copy; <span id="year"></span> <span data-i18n="footer_rights">All rights reserved.</span>
+      </p>
+      <div class="footer-icons">
+        <a href="mailto:aref@inventionsvillage.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" class="icon"><path d="M20 4H4c-1.1 0-2 .9-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/aref-al-awadhi-791a312a/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" class="icon"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5Zm.02 5.5H2v12h3V9ZM9 9H6v12h3v-6c0-1.65 1.35-3 3-3s3 .93 3 2.9V21h3v-6.5C18 11.5 16.43 9 13.9 9c-1.29 0-2.52.58-3.3 1.53V9Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/ivtd.js" defer></script>
+</body>
+</html>
