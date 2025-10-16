@@ -137,25 +137,65 @@
   </section>
 
   <!-- Books strip -->
-  <section id="books" class="ivtd-section dim">
-    <div class="ivtd-container">
-      <h2 class="center" data-i18n="books_strip_title">Featured Books</h2>
-      <div class="book-strip">
-        <div class="book">
-          <div class="bk-cover" aria-hidden="true"></div>
-          <div class="bk-title" data-i18n="book_1_short">Electricity & Electronics — A Journey of Inventions</div>
+<!-- Books strip -->
+<section id="books" class="ivtd-section dim">
+  <div class="ivtd-container">
+    <h2 class="center" data-i18n="books_strip_title">Featured Books</h2>
+
+    <div class="book-strip" role="list">
+      <!-- 1 — Electricity & Electronics -->
+      <div class="book" role="listitem" data-img="assets/Book cover.JPG" aria-label="Book 1">
+        <img class="bk-img" alt="Book 1 cover" loading="lazy" />
+        <div class="bk-title" data-i18n="book_1_short">
+          The Story of Electricity and Electronics — A Journey Through the History of the Most Important Inventions
         </div>
-        <div class="book">
-          <div class="bk-cover" aria-hidden="true"></div>
-          <div class="bk-title" data-i18n="book_2_short">How to Become an Inventor</div>
+        <div class="bk-sub" data-i18n="book_1_sub">
+          A curated tour through key breakthroughs that shaped modern technology and everyday life.
         </div>
-        <div class="book">
-          <div class="bk-cover" aria-hidden="true"></div>
-          <div class="bk-title" data-i18n="book_3_short">Invention: From Idea to Business</div>
+      </div>
+
+      <!-- 2 — How to Become an Inventor -->
+      <div class="book" role="listitem" data-img="assets/Inventor cover.jpg" aria-label="Book 2">
+        <img class="bk-img" alt="Book 2 cover" loading="lazy" />
+        <div class="bk-title" data-i18n="book_2_short">How to Become an Inventor</div>
+        <div class="bk-sub" data-i18n="book_2_sub">
+          Practical steps, mindsets, and methods to develop ideas into real prototypes and products.
+        </div>
+      </div>
+
+      <!-- 3 — Invention: From Idea to Business -->
+      <div class="book" role="listitem" data-img="assets/Picture3.png" aria-label="Book 3">
+        <img class="bk-img" alt="Book 3 cover" loading="lazy" />
+        <div class="bk-title" data-i18n="book_3_short">Invention: From Idea to Business</div>
+        <div class="bk-sub" data-i18n="book_3_sub">
+          Explains the journey from concept to company, with a note on Bahrain’s role in supporting SMEs.
+        </div>
+      </div>
+
+      <!-- 4 — Thoughts in Management -->
+      <div class="book" role="listitem" data-img="assets/Picture1.png" aria-label="Book 4">
+        <img class="bk-img" alt="Book 4 cover" loading="lazy" />
+        <div class="bk-title" data-i18n="book_4_short">
+          Thoughts in Management — Stories and Tales from Real Life
+        </div>
+        <div class="bk-sub" data-i18n="book_4_sub">
+          Real-world reflections and lessons for leaders, teams, and decision-makers.
+        </div>
+      </div>
+
+      <!-- 5 — Inventions, from an Idea to a Business -->
+      <div class="book" role="listitem" data-img="assets/Picture2.png" aria-label="Book 5">
+        <img class="bk-img" alt="Book 5 cover" loading="lazy" />
+        <div class="bk-title" data-i18n="book_5_short">Inventions, from an Idea to a Business</div>
+        <div class="bk-sub" data-i18n="book_5_sub">
+          A concise guide to validating, funding, and launching invention-driven ventures.
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+
 
   <!-- Contact -->
   <section id="contact" class="ivtd-section">
@@ -229,25 +269,26 @@
   </section>
 
   <!-- Footer with logo -->
-  <footer class="ivtd-footer">
-    <div class="ivtd-container footer-wrap">
-      <a class="footer-brand" href="#about" aria-label="IVTD Home">
-        <img src="assets/ivtd.png" alt="IVTD logo">
-        <span data-i18n="footer_brand">Inventions Village Technical Design</span>
-      </a>
-      <p class="rights">
-        &copy; <span id="year"></span> <span data-i18n="footer_rights">All rights reserved.</span>
-      </p>
-      <div class="footer-icons">
-        <a href="mailto:aref@inventionsvillage.com" aria-label="Email">
-          <svg viewBox="0 0 24 24" class="icon"><path d="M20 4H4c-1.1 0-2 .9-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/aref-al-awadhi-791a312a/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" class="icon"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5Zm.02 5.5H2v12h3V9ZM9 9H6v12h3v-6c0-1.65 1.35-3 3-3s3 .93 3 2.9V21h3v-6.5C18 11.5 16.43 9 13.9 9c-1.29 0-2.52.58-3.3 1.53V9Z"/></svg>
-        </a>
+ <footer class="ivtd-footer">
+  <div class="ivtd-container">
+    <!-- bottom bar only, like BSCM -->
+    <div class="footer-bottom" aria-label="site footer bar">
+      <div class="footer-left">
+        <!-- keep your logo + site name + year on the LEFT -->
+        <img class="footer-logo" src="assets/ivtd.png" alt="IVTD logo">
+        <span class="footer-site">Inventions Village Technical Design</span>
+        <span class="footer-year">© <span id="year"></span></span>
+      </div>
+
+      <div class="footer-right">
+        <!-- developer credit on the RIGHT -->
+        <span class="dev-by">Developed by</span>
+        <a class="dev-link" href="https://intermid.net" target="_blank" rel="noopener">INTERMID</a>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
+
 
   <!-- Scripts -->
   <script src="js/ivtd.js" defer></script>
