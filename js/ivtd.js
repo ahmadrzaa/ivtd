@@ -119,7 +119,7 @@
       svc_2_t: "دراسات جدوى (فنية وتطبيقية وتجارية)",
       svc_2_p: "تقييم الجدوى الفنية وإمكانية التطبيق\nوالفرص التجارية في السوق.",
       /* CHANGED: forced line break per client */
-      svc_3_t: "استشارات ومساعدة\nللمخترعين",
+      svc_3_t: "استشارات ومساعدة\n المخترعين",
       svc_3_p: "إرشاد خطوات التطوير والنمذجة الأولية،\nومسارات الوصول إلى السوق والشراكات.",
       svc_4_t: "دورات تدريبية",
       svc_4_p: "ورش وبرامج لبناء المهارات\nللطلاب والمبتكرين والفرق.",
@@ -307,12 +307,9 @@ window.addEventListener('pointermove', e => {
 
 
 /* ==============================
-   Three.js Background — Minimal (no sphere)
-   Subtle glow + fine particles, masked to HERO only
+   Three.js Background — Apple-Light
+   Soft Siri colors on WHITE, masked to hero only
 ============================== */
-
-
-
 (function threeBG(){
   const DISABLE_3D = false;
   if (DISABLE_3D) return;
@@ -320,25 +317,24 @@ window.addEventListener('pointermove', e => {
   const can = document.createElement('canvas');
   if (!(can.getContext('webgl') || can.getContext('experimental-webgl'))) return;
 
-  // Tighter mask: fade stops shortly after hero bottom
-  const heroMask = () => {
+  // Fade out a little below the hero section
+  function heroMask(){
     const hero = document.querySelector('.ivtd-hero');
     const h = hero ? hero.getBoundingClientRect().height : 520;
-    const keepOpaque = Math.max(0, h - 60);                  // fully visible until 60px above bottom
-    const fade = Math.min(160, Math.max(100, h * 0.28));     // short fade below hero
-    return `linear-gradient(180deg,#000 0,#000 ${keepOpaque}px,transparent ${keepOpaque+fade}px)`;
-  };
+    const keep = Math.max(0, h - 60);
+    const fade = Math.min(160, Math.max(100, h * 0.28));
+    return `linear-gradient(180deg,#000 0,#000 ${keep}px,transparent ${keep+fade}px)`;
+  }
 
   const moduleCode = (cdn) => `
     import * as THREE from "${cdn}/three@0.160.0/build/three.module.js";
 
-    // --- Renderer ---
     const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true, powerPreference:"high-performance" });
-    renderer.setPixelRatio(Math.min(devicePixelRatio||1, 2.0));
+    renderer.setPixelRatio(Math.min(devicePixelRatio||1, 2));
     renderer.setSize(innerWidth, innerHeight, false);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.28;  // brighter
+    renderer.toneMappingExposure = 1.0;
 
     const el = renderer.domElement;
     el.id = "ivtdBG";
@@ -350,16 +346,15 @@ window.addEventListener('pointermove', e => {
     });
     document.body.prepend(el);
 
-    // --- Scene / Camera ---
     const scene  = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(36, innerWidth/innerHeight, 0.1, 200);
     camera.position.set(0, 1.05, 8);
 
-    // --- Lighting (clean & vivid) ---
-    scene.add(new THREE.AmbientLight(0xffffff, .6));
-    const key = new THREE.PointLight(0x7fdcff, .95, 65); key.position.set(-3.2, 2.6, -2.3); scene.add(key);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+    const key = new THREE.PointLight(0xffffff, 0.6, 60); 
+    key.position.set(0, 3, -2); 
+    scene.add(key);
 
-    // --- Helpers ---
     function radialTexture(size=256){
       const c = document.createElement('canvas'); c.width=c.height=size;
       const g = c.getContext('2d');
@@ -369,42 +364,52 @@ window.addEventListener('pointermove', e => {
       g.fillStyle = grd; g.fillRect(0,0,size,size);
       return new THREE.CanvasTexture(c);
     }
-    const glowMap = radialTexture(256);
+    const spriteTex = radialTexture(256);
 
-    function glow(color, size, x,y,z, opacity=.34){
+    function glow(hex, size, x,y,z, opacity=.28){
       const mat = new THREE.SpriteMaterial({
-        map: glowMap, color, transparent:true, opacity,
+        map: spriteTex, color: hex, transparent:true, opacity,
         blending: THREE.AdditiveBlending, depthWrite:false
       });
       const s = new THREE.Sprite(mat); s.scale.set(size,size,1); s.position.set(x,y,z);
       return s;
     }
 
-    // --- Glows (no small dots) ---
-    const glowLeft  = glow(0x11d6ff, 7.4, -2.4, 0.55, -2.0, .36); // cyan
-    const glowRight = glow(0xf3ff3c, 6.2,  2.6, 0.85, -3.1, .24); // neon yellow
-    scene.add(glowLeft, glowRight);
+    // Siri pastel glows
+    const glowL = glow(0x8e5cff, 7.2, -2.6, 0.55, -2.2, 0.30);
+    const glowC = glow(0x3aa4ff, 5.6,  0.3,  0.95, -3.4, 0.22);
+    const glowR = glow(0xff5cd2, 6.6,  2.7,  0.75, -3.0, 0.24);
+    scene.add(glowL, glowC, glowR);
 
-    // --- Soft light beams (subtle) ---
-    function beam(color=0x8fe8ff, w=6, h=9.5, rot=0.38, x=-3.3, y=-1.0, z=-4.4, alpha=.14){
-      const tex = radialTexture(256);
+    // subtle beams
+    function beam(hex, w,h, rot, x,y,z, alpha=.10){
       const mat = new THREE.MeshBasicMaterial({
-        map: tex, color, transparent:true, opacity:alpha,
-        blending:THREE.AdditiveBlending, depthWrite:false
+        map: spriteTex, color: hex, transparent:true, opacity:alpha,
+        blending: THREE.AdditiveBlending, depthWrite:false
       });
       const geo = new THREE.PlaneGeometry(w,h);
       const m = new THREE.Mesh(geo, mat);
-      m.position.set(x,y,z);
-      m.rotation.z = rot;
+      m.position.set(x,y,z); m.rotation.z = rot;
       return m;
     }
-    const beamL = beam(0x8fe8ff, 6.2, 10.0,  0.40, -3.4, -1.0, -4.6, 0.13);
-    const beamR = beam(0xeaff66, 5.2,  9.0, -0.34,  3.1, -1.0, -4.2, 0.11);
+    const beamL = beam(0x7fb2ff, 6.0, 10.0,  0.40, -3.5, -1.0, -4.6, 0.10);
+    const beamR = beam(0xff8adf, 5.2,  9.2, -0.34,  3.2, -1.0, -4.2, 0.09);
     scene.add(beamL, beamR);
 
-    // --- NO PARTICLES (kept intentionally clean) ---
+    // fine particles
+    const particles = new THREE.Group(); scene.add(particles);
+    const COUNT = (innerWidth < 768 ? 60 : 110);
+    for (let i=0;i<COUNT;i++){
+      const s = glow(0xffffff, THREE.MathUtils.randFloat(0.10,0.28),
+                     THREE.MathUtils.randFloat(-5,5),
+                     THREE.MathUtils.randFloat(-1.5,2.5),
+                     THREE.MathUtils.randFloat(-5.5,-3.2),
+                     0.08);
+      particles.add(s);
+      s.userData.vy = THREE.MathUtils.randFloat(0.02, 0.06);
+      s.userData.vx = THREE.MathUtils.randFloatSpread(0.02);
+    }
 
-    // Resize
     function resize(){
       renderer.setSize(innerWidth, innerHeight, false);
       camera.aspect = innerWidth/innerHeight;
@@ -413,47 +418,62 @@ window.addEventListener('pointermove', e => {
     resize();
     addEventListener('resize', resize);
 
-    // Cursor parallax
     const target = new THREE.Vector2(0,0);
     addEventListener('pointermove', e=>{
       target.set((e.clientX/innerWidth)*2-1, (e.clientY/innerHeight)*2-1);
     });
 
-    // Animate (gentle)
-    let t = 0;
-    (function tick(){
-      t += 0.016;
+    let tPrev = performance.now();
+    function tick(now=performance.now()){
+      const dt = Math.min(0.05, (now - tPrev)/1000);
+      tPrev = now;
+      const t = now * 0.001;
 
-      glowLeft.position.x  = -2.4 + Math.sin(t*0.45)*0.25 + target.x*0.12;
-      glowRight.position.y =  0.85 + Math.sin(t*0.60)*0.18 + target.y*0.08;
+      glowL.position.x  = -2.6 + Math.sin(t*0.40)*0.22 + target.x*0.10;
+      glowC.position.y  =  0.95 + Math.sin(t*0.55)*0.18 + target.y*0.06;
+      glowR.position.x  =  2.7  + Math.cos(t*0.36)*0.20 + target.x*0.08;
 
-      beamL.rotation.z =  0.40 + Math.sin(t*0.12)*0.03;
-      beamR.rotation.z = -0.34 + Math.cos(t*0.10)*0.03;
+      beamL.rotation.z =  0.40 + Math.sin(t*0.10)*0.03;
+      beamR.rotation.z = -0.34 + Math.cos(t*0.09)*0.03;
 
-      camera.position.x += (target.x*0.6 - camera.position.x)*0.035;
-      camera.position.y += (-target.y*0.25 + 1.05 - camera.position.y)*0.035;
+      for (const s of particles.children){
+        s.position.y += s.userData.vy * dt;
+        s.position.x += s.userData.vx * dt;
+        if (s.position.y > 3.2) s.position.y = -1.8;
+      }
+
+      camera.position.x += (target.x*0.55 - camera.position.x)*0.035;
+      camera.position.y += (-target.y*0.22 + 1.05 - camera.position.y)*0.035;
       camera.lookAt(0,0.2,0);
 
       renderer.render(scene, camera);
       requestAnimationFrame(tick);
-    })();
+    }
+    requestAnimationFrame(tick);
 
-    // allow host to refresh mask when hero size changes
+    // allow host to refresh mask on hero resize
     window.__ivtdSetBGMask = (css) => { el.style.WebkitMaskImage = css; el.style.maskImage = css; };
   `;
 
-  const load = (which) => new Promise((resolve, reject)=>{
-    const s = document.createElement('script');
-    s.type = 'module';
-    s.textContent = moduleCode(which === 'unpkg' ? 'https://unpkg.com' : 'https://cdn.jsdelivr.net/npm');
-    s.onload = resolve; s.onerror = reject;
-    document.head.appendChild(s);
-  });
+  function load(which){
+    return new Promise((res, rej)=>{
+      const s = document.createElement('script');
+      s.type = 'module';
+      s.textContent = moduleCode(which === 'unpkg' ? 'https://unpkg.com' : 'https://cdn.jsdelivr.net/npm');
+      s.onload = res; s.onerror = rej;
+      document.head.appendChild(s);
+    });
+  }
 
   load('jsdelivr').catch(()=>load('unpkg')).then(()=>{
     const applyMask = () => { if (window.__ivtdSetBGMask) window.__ivtdSetBGMask(heroMask()); };
     applyMask();
     addEventListener('resize', applyMask);
+    const hero = document.querySelector('.ivtd-hero');
+    if (hero && 'ResizeObserver' in window){
+      const ro = new ResizeObserver(applyMask);
+      ro.observe(hero);
+    }
   }).catch(()=> console.warn('[IVTD] 3D background disabled; falling back to CSS.'));
 })();
 

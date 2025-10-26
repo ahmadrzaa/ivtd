@@ -1,61 +1,87 @@
 /* =========================================================
-   IVTD — Premium Dark / Motion (no HTML changes)
-   ========================================================= */
+   IVTD — Apple Siri Light ++ (FULL DROP-IN, NO LAYOUT CHANGE)
+   - White base with animated pink/blue glows
+   - Siri gradient text (EN only), Arabic kept solid
+   - Premium card/button micro-interactions
+   - Hero shine sweep + subtle float
+========================================================= */
 
 /* ------------ Tokens ------------ */
 :root{
-  --bg0:#0f141a; --bg1:#191f26; --bg2:#1e242c;       /* page layers */
-  --ink:#e9edf3; --muted:#9ea7b4;
-  --teal:#09a1be; --teal-700:#07839b;
-  --neon:#f3ff3c;                                    /* accent */
-  --glass: rgba(28,33,40,.70);
-  --panel:#202833;                                    /* cards */
-  --stroke:#2b323d; --stroke-2:#3a4351;
-  --shadow:0 22px 60px rgba(0,0,0,.35);
-  --shadow-sm:0 12px 28px rgba(0,0,0,.22);
-  --ring:0 0 0 3px rgba(243,255,60,.28);
+  --bg0:#ffffff; --bg1:#ffffff; --bg2:#f5f5f7;
+
+  --ink:#1d1d1f;          /* Apple primary text */
+  --muted:#6e6e73;        /* Apple secondary */
+
+  --neon:#0071e3;         /* Apple blue CTA */
+  --teal:#09a1be; --teal-700:#07839b; /* kept for old hooks */
+
+  --glass:rgba(255,255,255,.85);
+  --panel:#ffffff;
+  --stroke:#d2d2d7; --stroke-2:#c7c7cc;
+
+  --shadow:0 14px 40px rgba(0,0,0,.08);
+  --shadow-sm:0 8px 20px rgba(0,0,0,.06);
+  --ring:0 0 0 3px rgba(0,113,227,.18);
+
+  /* Glow colors */
+  --glow-blue-1:rgba(58,164,255,.28);
+  --glow-pink-1:rgba(255,120,200,.26);
+  --glow-blue-2:rgba(186,215,255,.35);
+  --glow-pink-2:rgba(255,180,220,.35);
+
+  /* Siri gradient for text */
+  --siri-grad:linear-gradient(90deg,#8e5cff 0%, #3aa4ff 45%, #ff5cd2 100%);
 }
 
 /* ------------ Reset ------------ */
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 html{scroll-behavior:smooth}
+
+/* =========================================================
+   PAGE — pure white + animated edge glows (CSS-only)
+========================================================= */
 body{
-  font-family: Inter, ui-sans-serif, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    "SF Pro Text","Helvetica Neue", Segoe UI, Roboto, Arial, sans-serif;
   color:var(--ink);
   background:
-    radial-gradient(1100px 520px at 95% -10%, #0b3945 0%, transparent 60%),
-    radial-gradient(900px 480px at -10% 110%, #666f09 0%, transparent 60%),
-    linear-gradient(180deg, var(--bg1), var(--bg2));
+    radial-gradient(1100px 520px at 95% -10%, var(--glow-blue-2) 0%, transparent 60%),
+    radial-gradient(900px 480px  at -10% 110%, var(--glow-pink-2) 0%, transparent 60%),
+    #ffffff;
   line-height:1.65; overflow-x:hidden;
-  animation: bgShift 24s ease-in-out infinite alternate;
+  animation:ivtdPageGlow 22s ease-in-out infinite alternate;
 }
-@keyframes bgShift{
-  0%{ background-position:0 0,0 0,0 0 }
-  100%{ background-position:8% -2%, -6% 6%, 0 0 }
+@keyframes ivtdPageGlow{
+  0%{background-position:0 0,0 0,0 0}
+  100%{background-position:8% -2%,-6% 6%,0 0}
 }
 
-/* RTL: only layout direction & Arabic font */
+/* RTL: only direction + Arabic font */
 body.rtl{
-  direction: rtl;
-  font-family: Tajawal, Inter, ui-sans-serif, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  direction:rtl;
+  font-family:Tajawal,
+    "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    "SF Pro Text","Helvetica Neue", Segoe UI, Roboto, Arial, sans-serif;
 }
 
-/* Arabic + English wrapping */
-h1,h2,h3,p,.bk-title{ text-wrap: pretty; overflow-wrap:anywhere; word-break: normal; white-space: normal }
-body.rtl h1, body.rtl h2, body.rtl h3, body.rtl p, body.rtl .bk-title{ white-space: normal }
+/* Keep wrapping behavior */
+h1,h2,h3,p,.bk-title{ text-wrap:pretty; overflow-wrap:anywhere; word-break:normal; white-space:normal }
+body.rtl h1, body.rtl h2, body.rtl h3, body.rtl p, body.rtl .bk-title{ white-space:normal }
 
-/* ------------ Container ------------ */
+/* ------------ Container (unchanged) ------------ */
 .ivtd-container{ max-width:1180px; margin:0 auto; padding:16px 20px }
 
 /* =========================================================
-   Header — glass, premium nav
+   HEADER — light glass
 ========================================================= */
 .ivtd-header{
   position:sticky; top:0; z-index:1000;
   background:var(--glass);
-  -webkit-backdrop-filter: blur(10px) saturate(1.08);
-          backdrop-filter: blur(10px) saturate(1.08);
+  -webkit-backdrop-filter:blur(10px) saturate(1.08);
+          backdrop-filter:blur(10px) saturate(1.08);
   border-bottom:1px solid var(--stroke);
 }
 .ivtd-header .ivtd-container{
@@ -65,269 +91,244 @@ body.rtl h1, body.rtl h2, body.rtl h3, body.rtl p, body.rtl .bk-title{ white-spa
 .ivtd-brand img{ height:40px; width:auto }
 
 .ivtd-nav ul{ list-style:none; margin:0; padding:0; display:flex; gap:26px; justify-content:center; align-items:center }
-body.rtl .ivtd-nav ul{ direction: rtl }
+body.rtl .ivtd-nav ul{ direction:rtl }
 .ivtd-nav a{
   position:relative; display:block; padding:.4rem .9rem;
-  color:rgba(233,237,243,.95); text-decoration:none; font-weight:700;
-  transition: color .35s ease, transform .25s ease, letter-spacing .25s ease;
+  color:rgba(29,29,31,.92); text-decoration:none; font-weight:700;
+  transition:color .3s, transform .25s, letter-spacing .25s;
   border-radius:999px;
 }
 .ivtd-nav a::before{
-  content:""; position:absolute; inset:0;
-  border-radius:inherit;
-  border:1.5px solid rgba(233,237,243,.25);
-  transform: scale(.92);
-  opacity:0; transition: opacity .35s ease, transform .25s ease;
+  content:""; position:absolute; inset:0; border-radius:inherit;
+  border:1.5px solid rgba(0,0,0,.06);
+  transform:scale(.92); opacity:0; transition:opacity .3s, transform .25s;
 }
-.ivtd-nav a:hover{ color:#fff; letter-spacing:.2px; font-style: italic; }
-.ivtd-nav a:hover::before{ opacity:1; transform: scale(1); }
+.ivtd-nav a:hover{ color:#000 }
+.ivtd-nav a:hover::before{ opacity:1; transform:scale(1) }
 .ivtd-actions{ display:flex; gap:12px; justify-self:end }
 .ivtd-lang{ background:transparent; border:0; color:var(--neon); font-weight:800; cursor:pointer }
 .ivtd-lang:hover{ text-decoration:underline }
 .ivtd-nav .ivtd-cta{
-  border:1px solid var(--stroke); background:#0f141a; color:var(--ink);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 10px 22px rgba(0,0,0,.28);
+  border:1px solid var(--stroke); background:#fff; color:var(--ink);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 10px 22px rgba(0,0,0,.08);
 }
-.ivtd-nav .ivtd-cta:hover{ transform: translateY(-1px); border-color: color-mix(in srgb, var(--neon), #000 70%) }
-.ivtd-burger{ display:none; width:38px; height:38px; border:0; background:#0f141a; border-radius:10px; box-shadow: inset 0 0 0 1px var(--stroke) }
-.ivtd-burger span{ display:block; width:20px; height:2px; background:#d6dae1; margin:4px auto }
+.ivtd-nav .ivtd-cta:hover{ transform:translateY(-1px); border-color:var(--stroke-2) }
+.ivtd-burger{ display:none; width:38px; height:38px; border:0; background:#fff; border-radius:10px; box-shadow:inset 0 0 0 1px var(--stroke) }
+.ivtd-burger span{ display:block; width:20px; height:2px; background:#1d1d1f; margin:4px auto }
 
 /* =========================================================
-   Buttons — premium pill + arrow
+   BUTTONS — premium pill with micro-motion
 ========================================================= */
 .btn-primary, .btn-ghost{
   position:relative; display:inline-flex; align-items:center; justify-content:center;
   min-height:46px; padding:0 22px; border-radius:999px;
   font-weight:800; text-decoration:none; cursor:pointer;
   border:1px solid var(--stroke); color:var(--ink);
-  background:#0f141a;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 10px 22px rgba(0,0,0,.28);
-  transition: transform .07s, box-shadow .18s, border-color .18s, background .18s;
+  background:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 10px 22px rgba(0,0,0,.08);
+  transition:transform .07s, box-shadow .18s, border-color .18s, background .18s, filter .18s;
 }
 .btn-primary::after, .btn-ghost::after{
-  content:"↗"; margin-inline-start:.55rem; transform: translateX(0); transition: transform .22s ease;
-  font-weight:800; font-size: .95em;
+  content:"↗"; margin-inline-start:.55rem; transform:translateX(0); transition:transform .22s ease;
+  font-weight:800; font-size:.95em;
 }
-.btn-primary:hover, .btn-ghost:hover{
-  transform: translateY(-1px);
-  border-color: color-mix(in srgb, var(--neon), #000 70%);
-  box-shadow: 0 16px 34px rgba(243,255,60,.20);
+.btn-primary{
+  background:#0071e3; color:#fff; border-color:transparent;
+  box-shadow:0 16px 34px rgba(0,113,227,.20);
 }
-.btn-primary:hover::after, .btn-ghost:hover::after{ transform: translateX(3px) }
-.btn-ghost{ color:var(--teal); background:#152027 }
-.btn-ghost:hover{ background:#13242a }
+.btn-primary:hover{ transform:translateY(-1px); background:#0077ed; filter:saturate(1.05) }
+.btn-ghost{ color:#0071e3; background:#fff }
+.btn-ghost:hover{ border-color:var(--stroke-2) }
+.btn-primary:hover::after, .btn-ghost:hover::after{ transform:translateX(3px) }
 
 /* =========================================================
-   Hero
+   HERO — animated pink/blue glows + shine sweep
 ========================================================= */
 .ivtd-hero{
   padding:78px 0 58px;
   background:
-    radial-gradient(700px 260px at 80% -20%, rgba(9,161,190,.18), transparent 60%),
-    radial-gradient(600px 240px at -10% 110%, rgba(243,255,60,.12), transparent 60%),
-    var(--bg2);
+    radial-gradient(700px 260px at 80% -20%, var(--glow-blue-1) 0%, transparent 60%),
+    radial-gradient(600px 240px at -10% 110%, var(--glow-pink-1) 0%, transparent 60%),
+    var(--bg1);
   border-bottom:1px solid var(--stroke);
   position:relative; overflow:hidden;
 }
+
+/* drifting glow field */
 .ivtd-hero::before{
-  content:""; position:absolute; inset:-20%; pointer-events:none;
+  content:""; position:absolute; inset:-25% -20% -35% -20%; pointer-events:none;
   background:
-    radial-gradient(120% 70% at 110% -10%, rgba(255,255,255,.06), transparent 50%),
-    radial-gradient(120% 60% at -10% 120%, rgba(255,255,255,.05), transparent 50%);
-  filter: blur(14px);
-  animation: heroGlow 16s ease-in-out infinite alternate;
+    radial-gradient(35% 35% at 20% 20%, rgba(142,92,255,.25), transparent 60%),
+    radial-gradient(38% 38% at 80% 25%, rgba(58,164,255,.22), transparent 65%),
+    radial-gradient(40% 40% at 60% 80%, rgba(255,92,210,.20), transparent 65%);
+  filter:blur(18px);
+  animation:ivtdHeroDrift 18s ease-in-out infinite alternate;
 }
-@keyframes heroGlow{ 0%{transform: translate3d(0,0,0)} 100%{transform: translate3d(2%, -1%, 0)} }
+@keyframes ivtdHeroDrift{
+  0%{ transform:translate3d(0,0,0) }
+  100%{ transform:translate3d(2.5%, -2.5%, 0) }
+}
+
+/* glossy sweep line (very subtle) */
+.ivtd-hero::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(120deg, transparent 40%, rgba(255,255,255,.65) 48%, transparent 56%);
+  transform:translateX(-120%) skewX(-12deg);
+  animation:ivtdSweep 6.5s ease-in-out 1.2s infinite;
+  opacity:.25;
+}
+@keyframes ivtdSweep{
+  0%{ transform:translateX(-120%) skewX(-12deg) }
+  60%{ transform:translateX(120%)  skewX(-12deg) }
+  100%{ transform:translateX(120%)  skewX(-12deg) }
+}
+
 .hero-wrap{ display:grid; grid-template-columns:1.15fr .85fr; gap:30px; align-items:center }
-.hero-copy h1{ margin:0 0 12px; font-size: clamp(28px,4.4vw,50px); line-height:1.12; text-wrap: balance }
-.hero-copy h1 strong{ color:var(--neon) }
+.hero-copy h1{ margin:0 0 12px; font-size:clamp(28px,4.4vw,50px); line-height:1.12; text-wrap:balance; color:var(--ink) }
 .hero-sub{ color:var(--muted); margin:8px 0 22px; font-size:clamp(16px,1.8vw,18px); max-width:62ch }
 .hero-cta{ display:flex; gap:12px; flex-wrap:wrap }
 .hero-visual{ display:grid; place-items:center; perspective:900px }
 .hero-placeholder{
   width:100%; max-height:420px; border-radius:20px; border:1px solid var(--stroke);
-  background: linear-gradient(135deg,#222a34,#171c22);
-  box-shadow: var(--shadow);
-  transform: rotateX(2deg) rotateY(-3deg);
-  animation: float 9s ease-in-out infinite;
+  background:#fff; box-shadow:var(--shadow);
+  transform:rotateX(2deg) rotateY(-3deg);
+  animation:ivtdFloat 9s ease-in-out infinite;
 }
-@keyframes float{ 0%,100%{ transform: rotateX(2deg) rotateY(-3deg) translateY(0) } 50%{ transform: rotateX(1deg) rotateY(-2deg) translateY(-10px) } }
+@keyframes ivtdFloat{ 0%,100%{ transform:rotateX(2deg) rotateY(-3deg) translateY(0) } 50%{ transform:rotateX(1deg) rotateY(-2deg) translateY(-10px) } }
+
+/* EN-only Siri gradient text + gentle slide animation */
+html[lang="en"] [data-i18n="hero_title"]{
+  background:var(--siri-grad);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent; font-weight:800;
+  background-size:200% 100%;
+  animation:ivtdGradSlide 7s ease-in-out infinite alternate;
+}
+@keyframes ivtdGradSlide{
+  0%{ background-position:0% 50% }
+  100%{ background-position:100% 50% }
+}
+/* Arabic stays solid */
+html[lang="ar"] [data-i18n="hero_title"],
+html[lang="ar"] .hero-copy h1{ -webkit-text-fill-color:initial; color:var(--ink) }
 
 /* =========================================================
-   Sections
+   SECTIONS — colors only (layout intact)
 ========================================================= */
-.ivtd-section{ padding:64px 0; background: var(--bg1) }
-.ivtd-section.dim{ background: var(--bg2); border-block:1px solid var(--stroke) }
+.ivtd-section{ padding:64px 0; background:var(--bg1) }
+.ivtd-section.dim{ background:var(--bg2); border-block:1px solid var(--stroke) }
 .center{text-align:center}
-h2{ margin:0 0 14px; font-size:clamp(22px,3.4vw,30px); color:var(--neon) }
-h3{ margin:0 0 8px; font-size:clamp(18px,2.2vw,22px); color:#fff }
+h2{ margin:0 0 14px; font-size:clamp(22px,3.4vw,30px); color:var(--ink) }
+h3{ margin:0 0 8px; font-size:clamp(18px,2.2vw,22px); color:var(--ink) }
 p{ margin:0 0 10px }
 
 /* two-column */
 .split{ display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start }
 
-/* Cards */
+/* Cards — subtle hover lift + glow ring */
 .col .card, .svc, .contact .contact-card{
-  background: var(--glass);
-  -webkit-backdrop-filter: blur(8px) saturate(1.05);
-          backdrop-filter: blur(8px) saturate(1.05);
+  background:var(--glass);
+  -webkit-backdrop-filter:blur(8px) saturate(1.05);
+          backdrop-filter:blur(8px) saturate(1.05);
   border:1px solid var(--stroke);
-  border-radius:16px;
-  padding:18px;
-  box-shadow: var(--shadow-sm);
-  transition: transform .18s, box-shadow .18s, border-color .18s;
+  border-radius:16px; padding:18px;
+  box-shadow:var(--shadow-sm);
+  transition:transform .18s, box-shadow .18s, border-color .18s, box-shadow .18s;
 }
 .col .card:hover, .svc:hover, .contact .contact-card:hover{
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
-  border-color: var(--stroke-2);
+  transform:translateY(-4px);
+  border-color:var(--stroke-2);
+  box-shadow:0 22px 46px rgba(0,0,0,.10), 0 0 0 1px rgba(0,0,0,.02), 0 0 0 8px rgba(0,113,227,.05);
 }
 
-/* Services grid */
+/* Services grid (unchanged) */
 .cards{ margin-top:14px; display:grid; grid-template-columns:repeat(4,1fr); gap:18px }
 
 /* =========================================================
-   Featured Books — FLAT STRIP (image -> title -> paragraph)
-   Desktop: 5 in one row (LTR/RTL aware)
-   Mobile: vertical list (one per row), smaller centered card, full image
+   FEATURED BOOKS — same layout, nicer hover
 ========================================================= */
-
-/* Desktop strip */
 #books .book-strip{
-  display:grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap:16px;
-  align-items:start;
-  margin-top:16px;
+  display:grid; grid-template-columns:repeat(5, minmax(0,1fr));
+  gap:16px; align-items:start; margin-top:16px;
 }
-/* Desktop RTL placement */
-body.rtl #books .book-strip,
-html[dir="rtl"] #books .book-strip{ direction: rtl; }
+body.rtl #books .book-strip, html[dir="rtl"] #books .book-strip{ direction:rtl }
 
-/* Flat item */
-#books .book{
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  padding: 0;
-  border-radius: 0;
-  transition: transform .18s ease;
-}
-#books .book:hover{ transform: translateY(-3px) }
+#books .book{ background:transparent; border:0; box-shadow:none; padding:0; border-radius:0; transition:transform .18s ease, filter .18s }
+#books .book:hover{ transform:translateY(-3px); filter:saturate(1.04) }
 
-/* Desktop image (cover crop) */
 #books .bk-img{
-  width:100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  display:block;
-  border-radius: 10px;
-  box-shadow: 0 10px 24px rgba(0,0,0,.28);
+  width:100%; aspect-ratio:3/4; object-fit:cover; display:block;
+  border-radius:10px; box-shadow:0 10px 24px rgba(0,0,0,.10);
 }
-
-/* Title + paragraph */
 #books .bk-title{
-  margin-top: 8px;
-  font-weight: 800;
-  line-height: 1.35;
-  color:#fff;
-  text-align: start;
+  margin-top:8px; font-weight:800; line-height:1.35; color:var(--ink); text-align:start;
   display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
 }
-#books .bk-sub{
-  margin-top: 6px;
-  color: var(--muted);
-  line-height: 1.55;
-  text-align: start;
-  font-size: 0.95rem;
-}
-/* Stronger RTL text alignment for book captions */
-html[dir="rtl"] #books .bk-title,
-html[dir="rtl"] #books .bk-sub{
-  text-align: right !important;
-}
-
-/* Hide legacy cover DIV */
+#books .bk-sub{ margin-top:6px; color:var(--muted); line-height:1.55; text-align:start; font-size:.95rem }
+html[dir="rtl"] #books .bk-title, html[dir="rtl"] #books .bk-sub{ text-align:right !important }
 #books .bk-cover{ display:none !important }
 
 /* =========================================================
-   Contact
+   CONTACT — light inputs
 ========================================================= */
 .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start }
-.icon-row{ display:flex; align-items:center; gap:10px; text-decoration:none; color: var(--ink); padding:10px 12px; border-radius:12px; border:1px solid transparent }
-.icon-row:hover{ border-color: var(--stroke); background: rgba(255,255,255,.06) }
-.icon{ width:22px; height:22px; fill: var(--neon) }
-.contact-form label{ display:block; margin-bottom:10px; font-weight:700; color:#fff }
+.icon-row{ display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); padding:10px 12px; border-radius:12px; border:1px solid transparent }
+.icon-row:hover{ border-color:var(--stroke); background:rgba(0,0,0,.03) }
+.icon{ width:22px; height:22px; fill:var(--neon) }
+.contact-form label{ display:block; margin-bottom:10px; font-weight:700; color:var(--ink) }
 .contact-form .row{ display:grid; grid-template-columns:1fr 1fr; gap:10px }
 .contact-form input, .contact-form textarea{
   width:100%; padding:.85rem .95rem; border-radius:12px; border:1px solid var(--stroke);
-  background:#0f141a; color: var(--ink); outline:none; font:inherit;
+  background:#fff; color:var(--ink); outline:none; font:inherit;
   transition:border-color .18s, box-shadow .18s, background .18s;
 }
-.contact-form input::placeholder, .contact-form textarea::placeholder{ color:#7f8793 }
-.contact-form input:focus, .contact-form textarea:focus{ border-color: var(--neon); box-shadow: var(--ring) }
+.contact-form input::placeholder, .contact-form textarea::placeholder{ color:#9f9fa4 }
+.contact-form input:focus, .contact-form textarea:focus{ border-color:var(--neon); box-shadow:var(--ring) }
 .form-actions{ display:flex; gap:12px; align-items:center; margin-top:6px }
 .form-status{ min-height:1.2em; color:var(--muted) }
 
 /* =========================================================
-   Footer
+   FOOTER — light bar
 ========================================================= */
-/* =========================================================
-   Footer
-========================================================= */
-.ivtd-footer{ background: var(--bg2); border-top:1px solid var(--stroke) }
-
-/* single straight bar */
+.ivtd-footer{ background:var(--bg2); border-top:1px solid var(--stroke) }
 .footer-bottom{
-  direction:ltr;                                   /* keep LEFT/RIGHT even in RTL */
-  display:flex; align-items:center; justify-content:space-between;
+  direction:ltr; display:flex; align-items:center; justify-content:space-between;
   gap:16px; padding:12px 0;
 }
-
-.footer-left, .footer-right{
-  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
-}
-
+.footer-left, .footer-right{ display:flex; align-items:center; gap:10px; flex-wrap:wrap }
 .footer-logo{ height:22px; width:auto; display:block }
 .footer-site{ color:var(--ink); font-weight:700 }
 .footer-year{ color:var(--muted); margin-left:6px }
-
 .dev-by{ color:var(--muted) }
 .dev-link{ color:var(--neon); font-weight:800; text-decoration:none }
 .dev-link:hover{ text-decoration:underline }
-
-/* hide any old footer layout that might still be in DOM */
-.footer-wrap,
-.footer-brand,
-.footer-icons,
-.rights{ display:none !important }
-
+.footer-wrap,.footer-brand,.footer-icons,.rights{ display:none !important }
 
 /* =========================================================
-   Cursor ring
+   Cursor ring — Apple blue
 ========================================================= */
 body::after{
   content:""; position:fixed; left:0; top:0; width:18px; height:18px; pointer-events:none; z-index:9999;
-  border:1.7px solid rgba(243,255,60,.9); border-radius:50%;
-  transform: translate(calc(var(--mx, -999px) - 50%), calc(var(--my, -999px) - 50%));
-  transition: width .15s ease, height .15s ease, border-color .15s ease, transform .03s linear;
-  mix-blend-mode: screen; filter: drop-shadow(0 0 6px rgba(243,255,60,.5));
+  border:1.7px solid rgba(0,113,227,.7); border-radius:50%;
+  transform:translate(calc(var(--mx, -999px) - 50%), calc(var(--my, -999px) - 50%));
+  transition:width .15s ease, height .15s ease, border-color .15s ease, transform .03s linear;
+  mix-blend-mode:normal; filter:drop-shadow(0 0 6px rgba(0,113,227,.28));
 }
-a:hover ~ body::after, a:hover body::after { width:22px; height:22px }
+a:hover ~ body::after, a:hover body::after{ width:22px; height:22px }
 
 /* =========================================================
-   Responsive
+   Responsive — EXACT same layout
 ========================================================= */
-@media (max-width: 960px){
+@media (max-width:960px){
   .ivtd-header .ivtd-container{ grid-template-columns:auto 1fr auto }
   .ivtd-burger{ display:block }
   .ivtd-actions .ivtd-cta{ display:none }
 
   .ivtd-nav{
-    position: fixed; inset:64px 12px auto 12px; display:none;
-    background: var(--glass); border:1px solid var(--stroke); border-radius:16px; padding:10px; box-shadow: var(--shadow);
-    -webkit-backdrop-filter: blur(10px) saturate(1.05);
-            backdrop-filter: blur(10px) saturate(1.05);
+    position:fixed; inset:64px 12px auto 12px; display:none;
+    background:var(--glass); border:1px solid var(--stroke); border-radius:16px; padding:10px; box-shadow:var(--shadow);
+    -webkit-backdrop-filter:blur(10px) saturate(1.05);
+            backdrop-filter:blur(10px) saturate(1.05);
   }
   .ivtd-nav.open{ display:block }
   .ivtd-nav ul{ flex-direction:column; gap:8px; align-items:stretch }
@@ -339,59 +340,22 @@ a:hover ~ body::after, a:hover body::after { width:22px; height:22px }
   .split{ grid-template-columns:1fr }
   .cards{ grid-template-columns:1fr 1fr }
 
-  /* --- BOOKS: mobile = vertical list, smaller centered, full image --- */
-  #books .book-strip{
-    direction: inherit;           /* keeps RTL/LTR flow */
-    grid-template-columns: 1fr;   /* stack */
-    gap: 14px;
-    overflow: visible;
-  }
-  #books .book{
-    width: min(80vw, 300px);      /* smaller card */
-    margin-inline: auto;          /* center */
-  }
-  #books .bk-img{
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: contain;          /* show full cover */
-    background: var(--panel);
-    padding: 8px;                 /* small frame */
-    border-radius: 12px;
-    box-shadow: 0 10px 24px rgba(0,0,0,.28);
-  }
-  #books .bk-title,
-  #books .bk-sub{
-    width: min(80vw, 300px);      /* match text width to image */
-    margin-inline: auto;
-  }
-  /* extra-strong RTL text on mobile too */
-  html[dir="rtl"] #books .bk-title,
-  html[dir="rtl"] #books .bk-sub{ text-align:right !important; }
+  #books .book-strip{ direction:inherit; grid-template-columns:1fr; gap:14px; overflow:visible }
+  #books .book{ width:min(80vw,300px); margin-inline:auto }
+  #books .bk-img{ width:100%; aspect-ratio:3/4; object-fit:contain; background:var(--panel); padding:8px; border-radius:12px; box-shadow:0 10px 24px rgba(0,0,0,.10) }
+  #books .bk-title,#books .bk-sub{ width:min(80vw,300px); margin-inline:auto }
+  html[dir="rtl"] #books .bk-title, html[dir="rtl"] #books .bk-sub{ text-align:right !important }
 
-  /* --- CONTACT: center & contain on mobile (no overflow) --- */
-  .contact-grid{ grid-template-columns:1fr; }
-  .contact .contact-card, .contact-form{
-    max-width: 560px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 16px;
-  }
-  .contact-form .row{ grid-template-columns:1fr }   /* stack fields */
-  .contact-form input, .contact-form textarea{ font-size:16px } /* avoid iOS zoom */
+  .contact-grid{ grid-template-columns:1fr }
+  .contact .contact-card, .contact-form{ max-width:560px; width:100%; margin:0 auto; padding:16px }
+  .contact-form .row{ grid-template-columns:1fr }
+  .contact-form input, .contact-form textarea{ font-size:16px }
 
-  /* --- FOOTER: clean stack, keep words unbroken --- */
-/* --- FOOTER: mobile stack centered --- */
-.footer-bottom{
-  flex-direction:column;
-  gap:8px;
-  text-align:center;
-}
-.footer-left, .footer-right{ justify-content:center }
-.footer-logo{ height:20px }
+  .footer-bottom{ flex-direction:column; gap:8px; text-align:center }
+  .footer-left, .footer-right{ justify-content:center }
+  .footer-logo{ height:20px }
   .footer-icons{ justify-content:center }
 }
-
-/* stack services further down */
-@media (max-width: 560px){
+@media (max-width:560px){
   .cards{ grid-template-columns:1fr }
 }
